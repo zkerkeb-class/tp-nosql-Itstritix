@@ -1,5 +1,5 @@
 import connect from "./db.js";
-import Pokemon from '../models/pokemonModel.js';
+import Pokemon from '../models/pokemon.js';
 import fs from 'fs';
 import mongoose from 'mongoose';
 

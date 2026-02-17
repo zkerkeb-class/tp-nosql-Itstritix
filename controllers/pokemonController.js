@@ -1,4 +1,4 @@
-import Pokemon from '../models/pokemonModel.js';
+import Pokemon from '../models/pokemon.js';
 
 const allPkmnsController = async (req, res, next) => {
     try {
@@ -91,9 +91,9 @@ const deletePkmnController = async (req, res, next) => {
         const pokemon = await Pokemon.findOne({id: pkmnID});
         if (!pokemon) return res.status(404).json({ error: 'Pokemon not found' });
         const pokemonToDelete = await Pokemon.findOneAndDelete({id : pkmnID});
-        res.status(204).json({message: "Pokemon deleted"});
+        return res.json({message: "Pokemon deleted"});
     } catch (error) {
-        res.status(500).json({error: error.message})
+        return res.status(500).json({error: error.message})
     }
 }
 
