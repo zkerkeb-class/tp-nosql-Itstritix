@@ -3,23 +3,23 @@ import mongoose from "mongoose";
 const pokemonSchema = new mongoose.Schema({
     id: {
         type: Number,
-        required: true,
+        required: [true, "ID is required"],
         unique: true
     },
     name: {
         english: { type: String },
         japanese: { type: String },
         chinese: { type: String },
-        french: { type: String, required: true },
+        french: { type: String, required: [true, "French name is required"] },
     },
     type: {
         type: [String],
-        required: true,
+        required: [true, "Type is required"],
     },
     base: {
-        HP: { type: Number, required: true },
-        Attack: { type: Number, required: true },
-        Defense: { type: Number, required: true },
+        HP: { type: Number, required: [true, "HP stat is required"] },
+        Attack: { type: Number, required: [true, "Attack stat is required"] },
+        Defense: { type: Number, required: [true, "Defense stat is required"] },
         SpecialAttack: { type: Number },
         SpecialDefense: { type: Number },
         Speed: { type: Number },
