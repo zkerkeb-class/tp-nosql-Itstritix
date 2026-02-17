@@ -4,9 +4,11 @@ import 'dotenv/config';
 
 import express from 'express';
 import cors from 'cors';
-import './db/db.js'
+import connect from './db/db.js'
 
 import { router as pokemonRouter } from './routes/pokemonsRoute.js';
+
+await connect;
 
 const app = express();
 

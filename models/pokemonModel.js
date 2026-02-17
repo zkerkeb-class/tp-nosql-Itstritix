@@ -20,13 +20,12 @@ const pokemonSchema = new mongoose.Schema({
         HP: { type: Number, required: true },
         Attack: { type: Number, required: true },
         Defense: { type: Number, required: true },
-        SpecialAttack: { type: Number, required: true },
-        SpecialDefense: { type: Number, required: true },
-        Speed: { type: Number, required: true },
+        SpecialAttack: { type: Number },
+        SpecialDefense: { type: Number },
+        Speed: { type: Number },
     },
     image: {
         type: String,
-        required: true,
     },
 });
 

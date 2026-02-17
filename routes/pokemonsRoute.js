@@ -1,9 +1,11 @@
 import express from 'express';
-import { allPkmnsController, getPkmnByID } from '../controllers/pokemonController.js';
+import { allPkmnsController, getPkmnByIDController, addPkmnController, updatePkmnController } from '../controllers/pokemonController.js';
 const router = express.Router();
 
-router.get("/pokemons/:id", getPkmnByID);
+router.get("/pokemons/:id", getPkmnByIDController);
 router.get("/pokemons", allPkmnsController);
+router.post("/pokemons", addPkmnController);
+router.post("/pokemons", updatePkmnController);
 
 
 export { router };

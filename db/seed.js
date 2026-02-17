@@ -12,7 +12,7 @@ const seed = async () => {
         await Pokemon.insertMany(pokemons);
         console.log("Les 151 premiers pokémons ont été ajoutés.")
     } catch (error) {
-        console.log("OAZPE")
+        console.error(error);
     } finally {
         mongoose.connection.close();
     }
