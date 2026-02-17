@@ -2,7 +2,40 @@ import Pokemon from '../models/pokemonModel.js';
 
 const allPkmnsController = async (req, res, next) => {
     try {
-        const pokemonsList = await Pokemon.find();
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 50;
+        const skip = (page - 1) * limit;
+
+        var pokemonsList;
+        
+        var type = req.query.type;
+        var name = req.query.name;
+        var sort = req.query.sort; 
+        const filter = {}
+
+        if (type) {
+            filter.type = type.charAt(0).toUpperCase() + type.slice(1)
+        }
+
+        if (name) {
+            filter.$or = [
+                {"name.english": { $regex: name, $options: "i" }},
+                {"name.japanese": { $regex: name, $options: "i" }},
+                {"name.chinese": { $regex: name, $options: "i" }},
+                {"name.french": { $regex: name, $options: "i"}}
+            ]
+        }
+
+        if (sort) {
+            const order = sort.startsWith("-") ? -1 : 1;
+            const field = sort.startsWith("-") ? sort.slice(1) : sort;
+
+            pokemonsList = await Pokemon.find(filter).sort({ [field]: order }).skip(skip).limit(limit);
+            return res.json(pokemonsList);
+        }
+        
+
+        pokemonsList = await Pokemon.find(filter).skip(skip).limit(limit)
         res.status(200).json(pokemonsList);
     } catch (error) {
         res.status(500).json({error: error.message})
