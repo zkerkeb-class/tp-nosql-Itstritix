@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
-
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -23,23 +22,25 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 8
     },
-}, {timestamps: true});
+    favorites: {
+        type: [Number],
+        default: []
+    }
+}, { timestamps: true });
 
 userSchema.pre('save', async function (next) {
     try {
         const salt = await bcrypt.genSalt(10);
-        this.password =  await bcrypt.hash(this.password, salt);
+        this.password = await bcrypt.hash(this.password, salt);
         next();
-    }catch (error) {
+    } catch (error) {
         console.error(error);
     }
-
 });
 
 userSchema.methods.comparePassword = async function (candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password);
-}
-
+};
 
 const User = mongoose.model('User', userSchema);
 export default User;

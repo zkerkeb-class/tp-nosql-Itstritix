@@ -8,6 +8,9 @@ import connect from './db/db.js'
 
 import { router as pokemonRouter } from './routes/pokemonsRoute.js';
 import { router as authRouter } from './routes/authRoutes.js';
+import { router as statRoute } from './routes/statRoute.js';
+import { router as favoritesRouter } from './routes/favoritesRoute.js';
+import { router as teamsRouter } from './routes/teamsRoute.js';
 
 await connect;
 
@@ -22,6 +25,9 @@ app.use('/assets', express.static('assets')); // Permet d'accéder aux fichiers 
 
 app.use("/api/pokemons", pokemonRouter);
 app.use("/auth", authRouter);
+app.use("/api/", statRoute);
+app.use("/api/favorites", favoritesRouter);
+app.use("/api/teams", teamsRouter);
 
 
 app.get('/', (req, res) => {
