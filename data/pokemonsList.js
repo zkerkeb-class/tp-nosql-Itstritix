@@ -3239,4 +3239,4 @@ const pokemonsList = [
     }
 ]
 
-export default pokemonsList;
+export default { pokemonsList };
